@@ -221,15 +221,3 @@ public:
         return (polinom2 % polinom1, polinom2);
     }
 };
-
-
-/*
-int main() {
-    Polynomial<int> c({12,24,32});
-    cout << c << '\n';
-    Polynomial<int> d({1,2,3});
-    cout << d << '\n';
-    cout << (c,d);
-}
-*/
-

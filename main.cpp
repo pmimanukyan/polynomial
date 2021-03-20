@@ -4,15 +4,13 @@
 #include <utility>
 #include <cmath>
 
-using namespace std;
-
 template <typename T>
 class Polynomial {
 private:
-    vector<T> m_coefs;
+    std::vector<T> m_coefs;
 
 public:
-    Polynomial(const vector<T> &coefs) : m_coefs(coefs) {}
+    Polynomial(const std::vector<T> &coefs) : m_coefs(coefs) {}
 
     Polynomial(const T value = T()) {
         m_coefs.push_back(value);
@@ -62,7 +60,7 @@ public:
     }
 
     Polynomial<T> &operator*=(const Polynomial &polinom) {
-        vector<T> m_new(this->Degree() + polinom.Degree() + 1);
+        std::vector<T> m_new(this->Degree() + polinom.Degree() + 1);
         for (int i = 0; i <= this->Degree(); ++i) {
             for (int j = 0; j <= polinom.Degree(); ++j) {
                 m_new[i + j] += this->operator[](i) * polinom[j];
@@ -100,7 +98,7 @@ public:
         }
     }
 
-    T operator () (const T& x) const {
+    T operator()(const T& x) const {
         T result = T(0);
         T power = T(1);
         for (int i = 0; i <= Degree(); ++i) {
@@ -111,18 +109,18 @@ public:
     }
 
 
-    typename vector<T>::const_iterator begin() const {
+    typename std::vector<T>::const_iterator begin() const {
         return m_coefs.begin();
     }
 
-    typename vector<T>::const_iterator end() const {
+    typename std::vector<T>::const_iterator end() const {
         return m_coefs.end();
     }
 /*    vector<T> get_coefs_for_test() {
         return m_coefs;
     }*/
 
-    friend std::ostream& operator<< (std::ostream& out, Polynomial polinom) {
+    friend std::ostream& operator<<(std::ostream& out, Polynomial polinom) {
         if (polinom.Degree() == -1) {
             out << polinom[0];
             return out;
@@ -174,7 +172,7 @@ public:
         return out;
     }
 
-    friend Polynomial<T> operator & (const Polynomial<T> polinom1, const Polynomial<T>& polinom2) {
+    friend Polynomial<T> operator&(const Polynomial<T> polinom1, const Polynomial<T>& polinom2) {
         Polynomial<T> cur(T(0)), result;
         for (int i = 0; i <= polinom1.Degree(); ++i) {
             cur = Polynomial<T>(polinom1[i]);
@@ -186,10 +184,10 @@ public:
         return result;
     }
 
-    friend Polynomial<T> operator / (const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
+    friend Polynomial<T> operator/(const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
         if (polinom2.Degree() != -1) {
             Polynomial<T> p1 = polinom1;
-            vector<T> coef(max(0, p1.Degree() - polinom2.Degree() + 1)),
+            std::vector<T> coef(max(0, p1.Degree() - polinom2.Degree() + 1)),
                     m(max(0, p1.Degree() - polinom2.Degree() + 1), T(0));
             Polynomial<T> monomial(m);
             int cur_i;
@@ -206,7 +204,7 @@ public:
             return T(0);
         }
     }
-    friend Polynomial<T> operator % (const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
+    friend Polynomial<T> operator%(const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
         return polinom1 - (polinom1 / polinom2) * polinom2;
     }
 

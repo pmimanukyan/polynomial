@@ -1,4 +1,4 @@
-# polynomial
+# Polynomial
 Polynomial realization with std::vector in C++
 
 Realised: 

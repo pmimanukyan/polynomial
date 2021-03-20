@@ -54,7 +54,6 @@ public:
         return *this;
     }
 
-
     friend Polynomial<T> operator-(Polynomial<T> polinom1, const Polynomial<T> &polinom2) {
         return polinom1 -= polinom2;
     }
@@ -108,7 +107,6 @@ public:
         return result;
     }
 
-
     typename std::vector<T>::const_iterator begin() const {
         return m_coefs.begin();
     }
@@ -116,9 +114,6 @@ public:
     typename std::vector<T>::const_iterator end() const {
         return m_coefs.end();
     }
-/*    vector<T> get_coefs_for_test() {
-        return m_coefs;
-    }*/
 
     friend std::ostream& operator<<(std::ostream& out, Polynomial polinom) {
         if (polinom.Degree() == -1) {
@@ -207,7 +202,7 @@ public:
     friend Polynomial<T> operator%(const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
         return polinom1 - (polinom1 / polinom2) * polinom2;
     }
-
+// GCD
     friend Polynomial<T> operator,(const Polynomial<T>& polinom1, const Polynomial<T>& polinom2) {
         if (polinom1 == T(0)) {
             if (polinom2.Degree() != -1) {
